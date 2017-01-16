@@ -5,15 +5,6 @@ package com.bcdbook.flame.common.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import com.google.common.collect.Lists;
 
 /**
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
