@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <!-- 引入mybatis配置文件 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-mybatis.xml</param-value>
+  </context-param>
+  
+  <!-- 配置字符集过滤器,把字符集都转成UTF-8,以避免出现字符集不统一的问题 -->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <!-- 设置过滤的目录,此设置为全站过滤 -->
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 项目启动监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!-- 配置内存监听器,以防止内存泄露 -->
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <!-- 配置自己的监听器 -->
+  <!-- <listener>
+    <listener-class>com.bcdbook.summer.common.context.ContextParameter</listener-class>
+  </listener> -->
+  
+  <!-- 引入spring的相关配置,并设置spring容器作用的范围 -->
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <!-- 作用的范围 -->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!-- 忽略的文件 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/public/*</url-pattern>
+    <url-pattern>/static/*</url-pattern>
+    <url-pattern>/ifiles/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 设置session自动失效的时间 -->
+  <session-config>
+    <session-timeout>20</session-timeout>
+  </session-config>
+  
+  <!-- 设置几个默认页面 -->
+  <!-- 欢迎页 -->
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 错误连接页 -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404</location>
+  </error-page>
+  <!-- 错误信息页 -->
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error/500</location>
+  </error-page>
+</web-app>
